@@ -1,2 +1,45 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Dec 16 14:03:58 2020
+
+@author: Juhana
+"""
+
+import numpy as np
+
+numbers = [] 
+
+with open(r"C:\Users\Juhana\Desktop\input9.txt", 'r') as file:
+    for line in file:
+        line = line.strip()
+        numbers.append(line)
+
+        
+def check_validity(input_file):
+    if len(input_file) != 26:
+        print("Wrong size", len(input_file))
+        return False
+    
+    input_file = np.array(input_file)
+    
+    
+    for number in input_file:
+        number_1 = int(number)
+        for number in input_file:
+            number_2 = int(number)
+            if number_1 + number_2 == int(input_file[-1]):
+                return True
+            
+    print(input_file[-1])       
+    return True
+
+
+input_file = numbers[0:26]
+index = 0
+
+
+while check_validity(input_file) == True:
+    input_file = numbers[index:26 + index]
+    index +=1     

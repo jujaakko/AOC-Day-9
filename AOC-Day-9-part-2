@@ -1,0 +1,49 @@
+"""
+Created on Wed Dec 16 13:04:26 2020
+
+@author: Juhana
+"""
+import numpy as np
+
+numbers = [] 
+
+with open(r"C:\Users\Juhana\Desktop\input9.txt", 'r') as file:
+    for line in file:
+        line = line.strip()
+        numbers.append(int(line))
+        
+
+numbers = np.array(numbers)
+invalid_number = 41682220.0
+numbers = numbers[np.where(numbers <= invalid_number)]
+
+
+
+        
+def find_weakness(input_file,invalid_number):
+    index = 0
+    i = 1
+    working_file = []
+    working_file = np.array(working_file,dtype=float)
+    for number in input_file:
+        #working_file = np.append(working_file,number)
+        working_file = np.zeros(1)
+        index = i
+        for number in input_file[index:-1]:
+            index = index + 1
+            working_file = np.append(working_file,number)
+            if np.sum(working_file) == invalid_number:
+                print(working_file)
+                print(np.min(working_file[1:-1]) + np.max(working_file))
+                return False      
+            if np.sum(working_file) > invalid_number:
+                 break
+        i = i + 1
+    
+    print(i,np.sum(working_file))
+    return True
+
+index = 0
+
+
+print(find_weakness(numbers,invalid_number))
